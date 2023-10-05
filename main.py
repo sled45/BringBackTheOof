@@ -4,8 +4,6 @@ from win32api import CopyFile
 from win32gui import MessageBox
 from win32con import *
 
-#coded by sled45
-
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:
