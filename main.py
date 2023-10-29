@@ -13,12 +13,13 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
-def allSubsOf(b='.'):
-  result = []
-  for d in os.listdir(b):
-    bd = os.path.join(b, d)
-    if os.path.isdir(bd): result.append(bd)
-  return result
+
+def findClientFolders(b='.'):
+    result = []
+    for d in os.listdir(b):
+        bd = os.path.join(b,d)
+        if os.path.exists(os.path.join(bd,"RobloxPlayerBeta.exe")): result.append(bd)
+    return result
 
 def ReplaceWithOof(s):
     robloxDir = os.path.expandvars(r'%LOCALAPPDATA%\Roblox\Versions')
@@ -26,9 +27,9 @@ def ReplaceWithOof(s):
         MessageBox(None, "ERROR: bruh you dont even have Roblox installed", "BringBackTheOof", MB_ICONSTOP | MB_OK | MB_DEFBUTTON1)
     else:
         print(robloxDir)
-        allVers = allSubsOf(robloxDir)
-        print(allVers)
-        latestVer = max(allVers, key=os.path.getmtime, default=0)
+        allClients = findClientFolders(robloxDir)
+        print(allClients)
+        latestVer = max(allClients, key=os.path.getmtime, default=0)
         print(latestVer)
         ouchPath = os.path.join(latestVer, r"content\sounds\ouch.ogg")
         print(ouchPath)
@@ -52,4 +53,3 @@ elif startMsg == 7:
     ReplaceWithOof(1)
 else:
     MessageBox(None, ":(", "BringBackTheOof", MB_ICONINFORMATION | MB_OK | MB_DEFBUTTON1)
-
